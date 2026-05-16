@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yevgeniia Goncharenko</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <style>
+    body {
+      background-color: #cce7f5;
+      font-family: Georgia, serif;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      color: #1a3a5c;
+      margin-bottom: 30px;
+    }
+
+    canvas {
+      max-width: 500px;
+      margin: 0 auto;
+      display: block;
+    }
+
+    p.source {
+      margin-top: 30px;
+      font-size: 1rem;
+      color: #1a3a5c;
+    }
+
+    p.source a {
+      color: #1a3a5c;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Where People Listen to Podcasts (2017)</h1>
+
+  <canvas id="myChart"></canvas>
+
+  <p class="source">
+    <a href="https://www.edisonresearch.com/the-podcast-consumer-2017/" target="_blank">Source: Edison Research – The Podcast Consumer 2017</a>
+  </p>
+
+  <script>
+    const listenWhere = ["Home", "Work", "Commuting", "Other"];
+    const listenPercent = [51, 14, 25, 10];
+
+    const ctx = document.getElementById("myChart").getContext("2d");
+    new Chart(ctx, {
+      type: "pie",
+      data: {
+        labels: listenWhere,
+        datasets: [{
+          data: listenPercent,
+          backgroundColor: ["#4a90d9", "#e8734a", "#5cb85c", "#f0c040"],
+          borderColor: "#ffffff",
+          borderWidth: 2
+        }]
+      },
+      options: {
+        plugins: {
+          legend: {
+            position: "bottom",
+            labels: { font: { size: 14 }, color: "#1a3a5c" }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return context.label + ": " + context.parsed + "%";
+              }
+            }
+          }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
